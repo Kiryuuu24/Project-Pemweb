@@ -2,8 +2,8 @@
     <div class="max-w-xl mx-auto py-6 px-4">
         <h1 class="text-2xl font-bold mb-4">Tambah Lapangan</h1>
 
-        <form action="..." method="POST" enctype="multipart/form-data" class="space-y-4">
-            @csrf
+        <form action="{{ route('admin.fields.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+         @csrf
             <div>
                 <label class="block text-sm font-medium mb-1">Nama Lapangan</label>
                 <input type="text" name="name" value="{{ old('name') }}"

@@ -96,7 +96,6 @@
                         <span class="badge bg-success">Available</span>
 
                     </div>
-
                     <a href="/booking?field={{ $f->id_fields }}"
                        class="btn btn-success w-100 mt-3">
                         Booking
