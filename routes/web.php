@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FieldController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +22,19 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('fields', FieldController::class);
+     Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
+    Route::get('bookings/{booking}', [AdminBookingController::class, 'show'])->name('bookings.show');
+    Route::post('bookings/{booking}/confirm', [AdminBookingController::class, 'confirm'])->name('bookings.confirm');
+    Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/fields', [BookingController::class, 'index'])->name('booking.index');
+    Route::get('/booking/history', [BookingController::class, 'history'])->name('booking.history');
+    Route::get('/booking/{field}', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/{booking}/payment', [PaymentController::class, 'show'])->name('booking.payment');
+    Route::post('/booking/{booking}/payment', [PaymentController::class, 'store'])->name('payment.store');
 });
 
 require __DIR__.'/auth.php';
