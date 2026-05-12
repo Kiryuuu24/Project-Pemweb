@@ -97,38 +97,6 @@ footer{
             Booking venue futsal jadi lebih cepat dan mudah
         </p>
 
-        <div class="search-box">
-
-            <div class="row g-2">
-
-                <div class="col-md-4">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Cari venue">
-                </div>
-
-                <div class="col-md-3">
-                    <select class="form-select">
-                        <option>⚽ Futsal</option>
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <input type="date"
-                           class="form-control"
-                           value="{{ date('Y-m-d') }}">
-                </div>
-
-                <div class="col-md-2">
-                    <button class="btn btn-orange w-100">
-                        Cari
-                    </button>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
 </div>
