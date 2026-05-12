@@ -5,7 +5,7 @@
         <form action="{{ route('admin.fields.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
          @csrf
             <div>
-                <label class="block text-sm font-medium mb-1">Nama Lapangan</label>
+                   <label class="block text-sm font-medium mb-1">Nama Lapangan</label>
                 <input type="text" name="name" value="{{ old('name') }}"
                        class="w-full border rounded px-3 py-2" required>
                 @error('name') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror

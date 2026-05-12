@@ -9,20 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminBookingController extends Controller
 {
-    // Daftar semua booking
     public function index()
     {
         $bookings = Booking::with(['user', 'field', 'payment'])->latest()->get();
         return view('admin.bookings.index', compact('bookings'));
     }
 
-    // Detail booking + bukti bayar
     public function show(Booking $booking)
     {
         return view('admin.bookings.show', compact('booking'));
     }
 
-    // Konfirmasi pembayaran
     public function confirm(Booking $booking)
     {
         $booking->payment->update([
@@ -36,7 +33,6 @@ class AdminBookingController extends Controller
                          ->with('success', 'Pembayaran berhasil dikonfirmasi!');
     }
 
-    // Tolak pembayaran
     public function reject(Booking $booking)
     {
         $booking->payment->update(['status' => 'rejected']);

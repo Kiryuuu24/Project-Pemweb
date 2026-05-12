@@ -5,6 +5,7 @@ use App\Http\Controllers\FieldController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AdminBookingController;
 
 Route::get('/', function () {
     return view('welcome');
