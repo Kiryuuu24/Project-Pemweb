@@ -22,7 +22,7 @@ class FieldController extends Controller
 {
     $request->validate([
         'name'           => 'required|string|max:255',
-        'price_per_hour' => 'required|integer|min:1000',
+        'price_per_hour' => 'required|numeric|min:1000',
         'description'    => 'nullable|string',
         'image'          => 'nullable|image|max:2048',
     ]);
@@ -48,7 +48,7 @@ class FieldController extends Controller
 {
     $request->validate([
         'name'           => 'required|string|max:255',
-        'price_per_hour' => 'required|integer|min:1000',
+        'price_per_hour' => 'required|numeric|min:1000',
         'description'    => 'nullable|string',
         'image'          => 'nullable|image|max:2048',
     ]);
