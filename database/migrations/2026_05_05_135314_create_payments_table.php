@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('payments', function (Blueprint $table) {
         $table->id();
         $table->foreignId('booking_id')->constrained()->onDelete('cascade');
-        $table->string('proof_image');      // foto bukti transfer
+        $table->string('proof_image', 100);
         $table->enum('status', ['waiting', 'verified', 'rejected'])->default('waiting');
         $table->timestamp('verified_at')->nullable();
         $table->timestamps();
