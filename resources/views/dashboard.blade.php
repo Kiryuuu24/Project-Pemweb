@@ -5,7 +5,6 @@
 <style>
 body{background:#f5f5f5;font-family:sans-serif}
 
-/* HERO */
 .hero{
     min-height:80vh;
     background:
@@ -47,7 +46,6 @@ body{background:#f5f5f5;font-family:sans-serif}
     font-weight:700;
 }
 
-/* CARD */
 .card-field{
     border:none;
     border-radius:18px;
@@ -70,7 +68,6 @@ body{background:#f5f5f5;font-family:sans-serif}
     font-weight:800;
 }
 
-/* FOOTER */
 footer{
     background:#111;
     color:#aaa;
@@ -88,7 +85,6 @@ footer{
 }
 </style>
 
-<!-- HERO -->
 <div class="hero">
 
     <div class="container text-center">
@@ -137,7 +133,6 @@ footer{
 
 </div>
 
-<!-- VENUE -->
 <div class="container py-5">
 
     <div class="d-flex justify-content-between mb-4">
@@ -146,8 +141,7 @@ footer{
             Venue Futsal
         </h3>
 
-        <!-- SUDAH BISA DIPENCET -->
-        <a href="/fields"
+        <a href="{{ route('fields.index') }}"
            class="text-decoration-none fw-bold"
            style="color:#ff6b00">
             Lihat Semua →
@@ -157,59 +151,67 @@ footer{
 
     <div class="row">
 
-        <!-- CARD 1 -->
         <div class="col-md-6 mb-4">
 
-            <div class="card card-field shadow-sm">
+            <a href="{{ route('fields.index') }}"
+               class="text-decoration-none text-dark">
 
-                <img class="w-100"
-                     src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?q=80&w=1974&auto=format&fit=crop">
+                <div class="card card-field shadow-sm">
 
-                <div class="p-3">
+                    <img class="w-100"
+                         src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?q=80&w=1974&auto=format&fit=crop">
 
-                    <h5 class="fw-bold">
-                        Galaxy Futsal Arena
-                    </h5>
+                    <div class="p-3">
 
-                    <p class="text-muted small">
-                        📍 Lampung Selatan
-                    </p>
+                        <h5 class="fw-bold">
+                            Galaxy Futsal Arena
+                        </h5>
 
-                    <p class="price mb-0">
-                        Rp 120.000 / jam
-                    </p>
+                        <p class="text-muted small">
+                            📍 Lampung Selatan
+                        </p>
+
+                        <p class="price mb-0">
+                            Rp 120.000 / jam
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </a>
 
         </div>
 
-        <!-- CARD 2 -->
         <div class="col-md-6 mb-4">
 
-            <div class="card card-field shadow-sm">
+            <a href="{{ route('fields.index') }}"
+               class="text-decoration-none text-dark">
 
-                <img class="w-100"
-                     src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1974&auto=format&fit=crop">
+                <div class="card card-field shadow-sm">
 
-                <div class="p-3">
+                    <img class="w-100"
+                         src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1974&auto=format&fit=crop">
 
-                    <h5 class="fw-bold">
-                        Victory Futsal Center
-                    </h5>
+                    <div class="p-3">
 
-                    <p class="text-muted small">
-                        📍 Bandar Lampung
-                    </p>
+                        <h5 class="fw-bold">
+                            Victory Futsal Center
+                        </h5>
 
-                    <p class="price mb-0">
-                        Rp 150.000 / jam
-                    </p>
+                        <p class="text-muted small">
+                            📍 Bandar Lampung
+                        </p>
+
+                        <p class="price mb-0">
+                            Rp 150.000 / jam
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </a>
 
         </div>
 
@@ -217,7 +219,6 @@ footer{
 
 </div>
 
-<!-- FOOTER MIRIP GELORA -->
 <footer class="pt-5 pb-4">
 
     <div class="container">
@@ -243,11 +244,11 @@ footer{
                     Produk
                 </h6>
 
-                <a href="/fields" class="footer-link">
+                <a href="{{ route('fields.index') }}" class="footer-link">
                     Venue
                 </a>
 
-                <a href="#" class="footer-link">
+                <a href="{{ route('booking.history') }}" class="footer-link">
                     Booking
                 </a>
 
