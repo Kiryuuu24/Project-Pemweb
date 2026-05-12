@@ -1,0 +1,58 @@
+# Dataset
+data = [
+    ['Cerah', 'Normal', 'Pelan', 'Ya'],
+    ['Cerah', 'Tinggi', 'Pelan', 'Ya'],
+    ['Hujan', 'Tinggi', 'Pelan', 'Tidak'],
+    ['Cerah', 'Normal', 'Kencang', 'Ya']
+]
+
+# Ambil atribut dan target
+konsep = [row[:-1] for row in data]
+target = [row[-1] for row in data]
+
+# Inisialisasi hipotesis
+S = konsep[0].copy()
+G = [['?', '?', '?']]
+
+print("Hipotesis Awal")
+print("S =", S)
+print("G =", G)
+print()
+
+# Proses Candidate Elimination
+for i in range(len(konsep)):
+    print("Data ke-", i+1)
+    print("Data :", konsep[i], "->", target[i])
+
+    # Jika positif
+    if target[i] == "Ya":
+        for j in range(len(S)):
+            if konsep[i][j] != S[j]:
+                S[j] = '?'
+
+        # Hapus hipotesis G yang tidak cocok
+        G = [g for g in G if all(
+            g[x] == '?' or g[x] == konsep[i][x]
+            for x in range(len(g))
+        )]
+
+    # Jika negatif
+    else:
+        G_baru = []
+
+        for j in range(len(S)):
+            if konsep[i][j] != S[j]:
+                hipotesis = ['?', '?', '?']
+                hipotesis[j] = S[j]
+                G_baru.append(hipotesis)
+
+        G = G_baru
+
+    print("S =", S)
+    print("G =", G)
+    print("----------------------------------")
+
+print()
+print("Hipotesis Akhir")
+print("S =", S)
+print("G =", G)
