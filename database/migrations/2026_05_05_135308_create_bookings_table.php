@@ -15,10 +15,10 @@ return new class extends Migration
         $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('field_id')->constrained()->onDelete('cascade');
-        $table->date('date');               // tanggal main
-        $table->time('start_time');         // jam mulai
-        $table->time('end_time');           // jam selesai
-        $table->integer('total_price');
+        $table->date('date');
+        $table->time('start_time');
+        $table->time('end_time');
+        $table->float('total_price', 10, 2);
         $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
         $table->timestamps();
     });

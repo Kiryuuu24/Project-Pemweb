@@ -13,8 +13,8 @@ return new class extends Migration
 {
     Schema::create('fields', function (Blueprint $table) {
         $table->id();
-        $table->string('name');           // nama lapangan
-        $table->integer('price_per_hour'); // harga per jam
+        $table->string('name', 25);
+        $table->float('price_per_hour', 10, 2);
         $table->text('description')->nullable();
         $table->timestamps();
     });
