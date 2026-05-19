@@ -1,281 +1,116 @@
 <x-app-layout>
+    <div class="max-w-7xl mx-auto py-8 px-4">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-body{background:#f5f5f5;font-family:sans-serif}
-
-.hero{
-    min-height:80vh;
-    background:
-    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-    url('https://images.unsplash.com/photo-1518604666860-9ed391f76460?q=80&w=1974&auto=format&fit=crop');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    align-items:center;
-}
-
-.hero h1{
-    color:white;
-    font-size:50px;
-    font-weight:800;
-}
-
-.hero span{color:#ff6b00}
-.hero p{color:#ddd}
-
-.search-box{
-    background:white;
-    padding:20px;
-    border-radius:18px;
-    margin-top:25px;
-}
-
-.form-control,.form-select{
-    height:50px;
-    border-radius:12px;
-}
-
-.btn-orange{
-    background:#ff6b00;
-    color:white;
-    border:none;
-    height:50px;
-    border-radius:12px;
-    font-weight:700;
-}
-
-.card-field{
-    border:none;
-    border-radius:18px;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.card-field:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-
-.card-field img{
-    height:230px;
-    object-fit:cover;
-}
-
-.price{
-    color:#ff6b00;
-    font-weight:800;
-}
-
-footer{
-    background:#111;
-    color:#aaa;
-}
-
-.footer-link{
-    color:#aaa;
-    text-decoration:none;
-    display:block;
-    margin-bottom:8px;
-}
-
-.footer-link:hover{
-    color:white;
-}
-</style>
-
-<div class="hero">
-
-    <div class="container text-center">
-
-        <h1>
-            Booking <span>Lapangan Futsal</span>
-        </h1>
-
-        <p>
-            Booking venue futsal jadi lebih cepat dan mudah
-        </p>
-
-    </div>
-
-</div>
-
-<div class="container py-5">
-
-    <div class="d-flex justify-content-between mb-4">
-
-        <h3 class="fw-bold">
-            Venue Futsal
-        </h3>
-
-        <a href="{{ route('fields.index') }}"
-           class="text-decoration-none fw-bold"
-           style="color:#ff6b00">
-            Lihat Semua →
-        </a>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-6 mb-4">
-
-            <a href="{{ route('fields.index') }}"
-               class="text-decoration-none text-dark">
-
-                <div class="card card-field shadow-sm">
-
-                    <img class="w-100"
-                         src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?q=80&w=1974&auto=format&fit=crop">
-
-                    <div class="p-3">
-
-                        <h5 class="fw-bold">
-                            Galaxy Futsal Arena
-                        </h5>
-
-                        <p class="text-muted small">
-                            📍 Lampung Selatan
-                        </p>
-
-                        <p class="price mb-0">
-                            Rp 120.000 / jam
-                        </p>
-
-                    </div>
-
-                </div>
-
+        <!-- Welcome Banner -->
+        <div class="bg-gradient-to-r from-green-700 to-green-500 rounded-2xl p-8 text-white mb-8 shadow-lg">
+            <h1 class="text-3xl font-bold mb-1">Halo, {{ auth()->user()->name }}! 👋</h1>
+            <p class="text-green-100 mb-4">Selamat datang di FUTSALIN. Siap main hari ini?</p>
+            @if(auth()->user()->role !== 'admin')
+            <a href="/fields"
+               class="inline-block bg-white text-green-700 px-6 py-2 rounded-lg font-semibold hover:bg-green-50 transition">
+                Booking Sekarang →
             </a>
-
+            @endif
         </div>
 
-        <div class="col-md-6 mb-4">
-
-            <a href="{{ route('fields.index') }}"
-               class="text-decoration-none text-dark">
-
-                <div class="card card-field shadow-sm">
-
-                    <img class="w-100"
-                         src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1974&auto=format&fit=crop">
-
-                    <div class="p-3">
-
-                        <h5 class="fw-bold">
-                            Victory Futsal Center
-                        </h5>
-
-                        <p class="text-muted small">
-                            📍 Bandar Lampung
-                        </p>
-
-                        <p class="price mb-0">
-                            Rp 150.000 / jam
-                        </p>
-
+        @if(auth()->user()->role === 'admin')
+        <!-- Admin Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Total Lapangan</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1">{{ \App\Models\Field::count() }}</p>
                     </div>
-
+                    <div class="bg-green-100 p-4 rounded-xl text-3xl">🏟️</div>
                 </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Total Booking</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1">{{ \App\Models\Booking::count() }}</p>
+                    </div>
+                    <div class="bg-blue-100 p-4 rounded-xl text-3xl">📅</div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Menunggu Konfirmasi</p>
+                        <p class="text-3xl font-bold text-yellow-500 mt-1">{{ \App\Models\Booking::where('status', 'pending')->count() }}</p>
+                    </div>
+                    <div class="bg-yellow-100 p-4 rounded-xl text-3xl">⏳</div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Quick Links Admin -->
+        <h2 class="text-lg font-bold text-gray-700 mb-4">Menu Admin</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="/admin/bookings"
+               class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-400 hover:shadow-md transition group">
+                <div class="text-3xl mb-3">📋</div>
+                <h3 class="font-bold text-gray-800 text-lg group-hover:text-green-700">Kelola Booking</h3>
+                <p class="text-gray-500 text-sm mt-1">Konfirmasi atau tolak pembayaran user</p>
             </a>
-
+            <a href="/admin/fields"
+               class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-400 hover:shadow-md transition group">
+                <div class="text-3xl mb-3">🏟️</div>
+                <h3 class="font-bold text-gray-800 text-lg group-hover:text-green-700">Kelola Lapangan</h3>
+                <p class="text-gray-500 text-sm mt-1">Tambah, edit, atau hapus lapangan</p>
+            </a>
         </div>
+
+        @else
+        <!-- User Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Total Booking</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1">{{ \App\Models\Booking::where('user_id', auth()->id())->count() }}</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-xl text-3xl">📅</div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Booking Dikonfirmasi</p>
+                        <p class="text-3xl font-bold text-green-600 mt-1">{{ \App\Models\Booking::where('user_id', auth()->id())->where('status', 'confirmed')->count() }}</p>
+                    </div>
+                    <div class="bg-blue-100 p-4 rounded-xl text-3xl">✅</div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm font-medium">Menunggu Konfirmasi</p>
+                        <p class="text-3xl font-bold text-yellow-500 mt-1">{{ \App\Models\Booking::where('user_id', auth()->id())->where('status', 'pending')->count() }}</p>
+                    </div>
+                    <div class="bg-yellow-100 p-4 rounded-xl text-3xl">⏳</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links User -->
+        <h2 class="text-lg font-bold text-gray-700 mb-4">Menu</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="/fields"
+               class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-400 hover:shadow-md transition group">
+                <div class="text-3xl mb-3">⚽</div>
+                <h3 class="font-bold text-gray-800 text-lg group-hover:text-green-700">Booking Lapangan</h3>
+                <p class="text-gray-500 text-sm mt-1">Lihat dan pesan lapangan tersedia</p>
+            </a>
+            <a href="/booking/history"
+               class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-400 hover:shadow-md transition group">
+                <div class="text-3xl mb-3">📋</div>
+                <h3 class="font-bold text-gray-800 text-lg group-hover:text-green-700">Riwayat Booking</h3>
+                <p class="text-gray-500 text-sm mt-1">Lihat semua riwayat booking kamu</p>
+            </a>
+        </div>
+        @endif
 
     </div>
-
-</div>
-
-<footer class="pt-5 pb-4">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-4 mb-4">
-
-                <h4 class="text-white fw-bold">
-                    ⚽ FutsalKu
-                </h4>
-
-                <p class="mt-3">
-                    Platform booking lapangan futsal online untuk cari venue,
-                    cek jadwal dan booking dengan mudah.
-                </p>
-
-            </div>
-
-            <div class="col-md-2 mb-4">
-
-                <h6 class="text-white fw-bold mb-3">
-                    Produk
-                </h6>
-
-                <a href="{{ route('fields.index') }}" class="footer-link">
-                    Venue
-                </a>
-
-                <a href="{{ route('booking.history') }}" class="footer-link">
-                    Booking
-                </a>
-
-                <a href="#" class="footer-link">
-                    Jadwal
-                </a>
-
-            </div>
-
-            <div class="col-md-3 mb-4">
-
-                <h6 class="text-white fw-bold mb-3">
-                    Bantuan
-                </h6>
-
-                <a href="#" class="footer-link">
-                    Pusat Bantuan
-                </a>
-
-                <a href="#" class="footer-link">
-                    Kontak Kami
-                </a>
-
-                <a href="#" class="footer-link">
-                    Syarat & Ketentuan
-                </a>
-
-            </div>
-
-            <div class="col-md-3 mb-4">
-
-                <h6 class="text-white fw-bold mb-3">
-                    Ikuti Kami
-                </h6>
-
-                <a href="#" class="footer-link">
-                    Instagram
-                </a>
-
-                <a href="#" class="footer-link">
-                    TikTok
-                </a>
-
-                <a href="#" class="footer-link">
-                    YouTube
-                </a>
-
-            </div>
-
-        </div>
-
-        <hr style="border-color:#333;">
-
-        <div class="text-center">
-            © 2026 FutsalKu. All rights reserved.
-        </div>
-
-    </div>
-
-</footer>
-
 </x-app-layout>
